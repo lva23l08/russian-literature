@@ -10,8 +10,15 @@
         <h1><a href="/">Русская литература</a></h1>
         <nav>
             <a href="/">Главная</a>
-            <a href="#">Цитатник</a>
-            <a href="#">Вход</a>
+            
+            <!-- Вот тут логика входа и выхода -->
+            {% if session.get('user_id') %}
+                <span style="margin-left: 20px; font-weight: bold;">Привет, {{ session['username'] }}!</span>
+                <a href="/logout" style="margin-left: 10px; color: red;">Выйти</a>
+            {% else %}
+                <a href="/login">Вход</a>
+            {% endif %}
+            
         </nav>
     </header>
 

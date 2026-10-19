@@ -6,17 +6,66 @@
 
 body {
     font-family: 'Georgia', serif;
-    background-color: #f4f4f4;
-    color: #222;
+    /* Тёплый цвет старой бумаги */
+    background-color: #e8e4d9; 
+    color: #2c2c2c;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
+/* ====== АНИМИРОВАННЫЙ ФОН (Цветной Петербург) ====== */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/bg.jpg'); /* Фото из папки static/images/bg.jpg */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+    /* Легкая сепия для атмосферы, но без ч/б */
+    filter: sepia(30%) contrast(110%) brightness(95%);
+    opacity: 0.5; /* Фото видно на 50% */
+    
+    z-index: -2;
+    animation: cityBreath 30s infinite alternate;
+}
+
+/* Легкий туман/градиент, чтобы текст читался лучше */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(232, 228, 217, 0.8) 0%, rgba(232, 228, 217, 0.2) 50%, rgba(232, 228, 217, 0.8) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes cityBreath {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* ====== ШАПКА И НАВИГАЦИЯ ====== */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
     border-bottom: 2px solid #222;
-    background: #fff;
+    /* Эффект матового стекла */
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 a {
@@ -40,9 +89,11 @@ nav a:hover {
 
 main {
     padding: 40px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Горизонтальная галерея */
+/* ====== ГАЛЕРЕЯ ПИСАТЕЛЕЙ ====== */
 .gallery {
     display: flex;
     overflow-x: auto;
@@ -53,7 +104,8 @@ main {
 .card {
     min-width: 220px;
     text-align: center;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон */
+    backdrop-filter: blur(5px); /* Размытие фона за карточкой */
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
@@ -68,6 +120,7 @@ main {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     border-color: #000;
+    background: rgba(255, 255, 255, 0.95); /* При наведении становится ярче */
 }
 
 .writer-photo {
@@ -118,15 +171,44 @@ footer {
     margin-top: 40px;
     color: #666;
     font-size: 14px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 1;
 }
 
-/* Стили для страницы писателя */
+/* ====== ЦИТАТА ДНЯ ====== */
+.quote-of-day {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 30px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+.quote-of-day p {
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.quote-of-day .author {
+    font-weight: bold;
+    color: #555;
+}
+
+/* ====== СТРАНИЦА ПИСАТЕЛЯ ====== */
 .writer-header {
     display: flex;
     gap: 40px;
     align-items: flex-start;
     margin-bottom: 40px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
     padding: 30px;
     border: 1px solid #ddd;
 }
@@ -154,6 +236,7 @@ footer {
     padding-bottom: 2px;
 }
 
+/* ====== СЕТКА КНИГ ====== */
 .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -162,7 +245,8 @@ footer {
 }
 
 .book-card {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
@@ -171,6 +255,7 @@ footer {
 
 .book-card:hover {
     transform: scale(1.03);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .book-cover {
@@ -196,23 +281,56 @@ footer {
     font-size: 14px;
     color: #444;
 }
-.quote-of-day {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 40px auto;
+
+/* ====== ФОРМЫ ВХОДА И РЕГИСТРАЦИИ ====== */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
     padding: 30px;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.1);
 }
 
-.quote-of-day p {
-    font-size: 22px;
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 10px;
+.auth-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.quote-of-day .author {
+.auth-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.auth-container button:hover {
+    background: #555;
+}
+
+.auth-container p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.flash {
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
     font-weight: bold;
-    color: #555;
 }
+.flash.error { background: #ffcccc; color: #cc0000; }
+.flash.success { background: #ccffcc; color: #006600; }

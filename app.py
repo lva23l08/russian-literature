@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from config import Config
-from models import db, Writer, Book
+from models import db, Writer, Book, Quote # Добавили Quote
+import random
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -9,7 +10,11 @@ db.init_app(app)
 @app.route('/')
 def index():
     writers = Writer.query.all()
-    return render_template('index.html', writers=writers)
+    # Получаем все цитаты и выбираем одну случайную
+    quotes = Quote.query.all()
+    quote_of_day = random.choice(quotes) if quotes else None
+    
+    return render_template('index.html', writers=writers, quote=quote_of_day)
 
 @app.route('/writer/<int:writer_id>')
 def writer_page(writer_id):

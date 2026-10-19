@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<!-- Блок Цитата дня -->
+{% if quote %}
+<div class="quote-of-day">
+    <p>«{{ quote.text }}»</p>
+    <span class="author">— {{ quote.writer.name }}</span>
+</div>
+{% endif %}
+
 <h2 style="text-align: center; margin-bottom: 20px;">Галерея писателей</h2>
 
 <div class="gallery">

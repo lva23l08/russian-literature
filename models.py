@@ -32,6 +32,9 @@ class Quote(db.Model):
     likes = db.Column(db.Integer, default=0)
     writer_id = db.Column(db.Integer, db.ForeignKey('writers.id'), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
+    
+    # ВОТ ЭТА СТРОКА СВЯЗЫВАЕТ ЦИТАТУ С ПИСАТЕЛЕМ:
+    writer = db.relationship('Writer', backref='quotes')
 
 class User(db.Model):
     __tablename__ = 'users'

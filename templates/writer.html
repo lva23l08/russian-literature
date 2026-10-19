@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="writer-page">
+    <div class="writer-header">
+        {% if writer.photo %}
+            <img src="{{ url_for('static', filename='images/' + writer.photo) }}" alt="{{ writer.name }}" class="writer-portrait">
+        {% endif %}
+        <div class="writer-info">
+            <h1>{{ writer.name }}</h1>
+            <p class="years">{{ writer.years }}</p>
+            <p class="bio">{{ writer.bio }}</p>
+            <a href="/" class="btn-back">← Назад к галерее</a>
+        </div>
+    </div>
+
+    <h2>Произведения</h2>
+    <div class="books-grid">
+        {% for book in books %}
+        <div class="book-card">
+            <div class="book-cover">
+                <h3>{{ book.title }}</h3>
+            </div>
+            <p class="book-year">{{ book.year }} г.</p>
+            <p class="book-plot">{{ book.plot }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

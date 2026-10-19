@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Русская литература</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Русская литература</a></h1>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="#">Цитатник</a>
+            <a href="#">Вход</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2026 Сайт «Русская литература»</p>
+    </footer>
+</body>
+</html>

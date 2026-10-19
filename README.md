@@ -52,3 +52,5 @@
 ```bash
 git clone https://github.com/lva23108/russian-literature.git
 cd russian-literature
+python app.py
+
